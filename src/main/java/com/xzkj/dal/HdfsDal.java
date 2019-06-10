@@ -31,10 +31,11 @@ public class HdfsDal {
             boolean flag = fs.exists(path);
             if (!flag) {
                 fs.mkdirs(path.getParent());
-                fs.create(path);
+                out = fs.create(path);
+            }else{
+                // 获取该路径的输出流，向文件追加数据
+                out = fs.append(path);
             }
-            // 获取该路径的输出流，向文件追加数据
-            out = fs.append(path);
             out.write(data.getBytes());
         } catch (IOException e) {
             logger_RollingError.error("{}",e);

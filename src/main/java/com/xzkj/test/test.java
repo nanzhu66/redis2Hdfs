@@ -10,7 +10,7 @@ public class test {
 
     public static void main(String[] args) {
 
-        String data = MyJedisUtills.getJedis().get("BaseData_444380_1560146150");
+/*        String data = MyJedisUtills.getJedis().get("BaseData_444380_1560146150");
 
         System.out.println(JSON.parseObject(data).keySet());
 
@@ -20,7 +20,11 @@ public class test {
         Collection<Object> values = JSON.parseObject(data).values();
         String s = values.stream().findFirst().toString();
 
-        System.out.println(s);
+        System.out.println(s);*/
+
+String data = "{1:{z:ZZ,b:BB}}";
+
+        System.out.println();
 
     }
 
