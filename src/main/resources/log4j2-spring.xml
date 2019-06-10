@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="300">
+    <properties>
+        <property name="LOG_HOME">D:/logs</property>
+        <property name="FILE_NAME">redis2hdfs</property>
+    </properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+        <RollingRandomAccessFile name="Rolling_Data"
+                                 fileName="${LOG_HOME}/data/${FILE_NAME}.log"
+                                 filePattern="${LOG_HOME}/data/$${date:yyyy-MM-dd}/${FILE_NAME}-%d{yyyy-MM-dd-HH}.log.%i">
+            <PatternLayout
+                    pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="168"/>
+        </RollingRandomAccessFile>
+        <RollingRandomAccessFile name="Rolling_Error"
+                                 fileName="${LOG_HOME}/err/${FILE_NAME}.err"
+                                 filePattern="${LOG_HOME}/err/$${date:yyyy-MM-dd}/${FILE_NAME}-%d{yyyy-MM-dd-HH}.err.%i">
+            <PatternLayout
+                    pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="168"/>
+        </RollingRandomAccessFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="RollingData" level="info" additivity="false">
+            <AppenderRef ref="Rolling_Data"/>
+        </Logger>
+        <Logger name="RollingError" level="info" additivity="false">
+            <AppenderRef ref="Rolling_Error"/>
+        </Logger>
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>
