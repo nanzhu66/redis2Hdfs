@@ -37,8 +37,8 @@ public class MyService {
         System.out.println(data);
 
         // 关闭资源
-//        redisDal.close();
-//        hdfsDal.close();
+        redisDal.close();
+        hdfsDal.close();
     }
 
 }

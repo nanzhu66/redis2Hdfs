@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
 
 public class MyHdfsUtills {
 
-    private static org.slf4j.Logger logger_RollingError = LoggerFactory.getLogger("RollingError");
+    private static org.slf4j.Logger logger_RollingInfo = LoggerFactory.getLogger("RollingInfo");
     private static Configuration conf = null;
 
     static {
@@ -37,7 +37,7 @@ public class MyHdfsUtills {
         try {
             fs = FileSystem.get(conf);// FileSystem类是一个抽象，可以根据fs.defaultFS参数值不同而获取到访问不同文件系统的对象
         } catch (IOException e) {
-            logger_RollingError.error("{}",e);
+            logger_RollingInfo.error("{}",e);
         }
         return fs;
     }

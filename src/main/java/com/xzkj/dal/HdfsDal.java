@@ -13,7 +13,7 @@ import java.io.IOException;
 @Repository
 public class HdfsDal {
 
-    private static Logger logger_RollingError = LoggerFactory.getLogger("RollingError");
+    private static Logger logger_RollingInfo = LoggerFactory.getLogger("RollingInfo");
 
     private FileSystem fs = new MyHdfsUtills().getFileSystem();
 
@@ -38,12 +38,12 @@ public class HdfsDal {
             }
             out.write(data.getBytes());
         } catch (IOException e) {
-            logger_RollingError.error("{}",e);
+            logger_RollingInfo.error("{}",e);
         } finally {
             try {
                 out.close();
             } catch (IOException e) {
-                logger_RollingError.error("{}",e);
+                logger_RollingInfo.error("{}",e);
             }
         }
     }
@@ -55,7 +55,7 @@ public class HdfsDal {
         try {
             fs.close();
         } catch (IOException e) {
-            logger_RollingError.error("{}",e);
+            logger_RollingInfo.error("{}",e);
         }
     }
 
