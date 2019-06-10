@@ -23,16 +23,18 @@ public class MyService {
     public void dataFromRedis2Hdfs(String key, String type) {
         // 根据key，获得redis中的json数据
         String fullKey = type + "_" + key;
-        String data = redisDal.get(fullKey) + "\n";
-
-        //获得指定格式的当前时间
+        String redisData = redisDal.get(fullKey);
+        // 将内层的json解析出来，并加上换行符
+        String data = redisData.substring(1, redisData.length() - 1).split(":", 2)[1].trim() + "\n";
+        // 获得指定格式的当前时间
         Date now = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String date = dateFormat.format(now);
-
         // 根据type和时间，将json数据保存到相应hdfs路径
         String path = bundle.getString("path") + "ods_" + type + "_log/" + date + "/" + type + ".log";
         hdfsDal.write(path, data);
+
+        System.out.println(data);
 
         // 关闭资源
 //        redisDal.close();

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN" monitorInterval="300">
+<Configuration status="INFO" monitorInterval="300">
     <properties>
         <property name="LOG_HOME">D:/logs</property>
         <property name="FILE_NAME">redis2hdfs</property>
@@ -32,13 +32,13 @@
         </RollingRandomAccessFile>
     </Appenders>
     <Loggers>
-        <Logger name="RollingData" level="info" additivity="false">
+        <Logger name="RollingData" level="INFO" additivity="false">
             <AppenderRef ref="Rolling_Data"/>
         </Logger>
-        <Logger name="RollingError" level="info" additivity="false">
+        <Logger name="RollingError" level="INFO" additivity="false">
             <AppenderRef ref="Rolling_Error"/>
         </Logger>
-        <Root level="info">
+        <Root level="INFO">
             <AppenderRef ref="Console"/>
         </Root>
     </Loggers>
