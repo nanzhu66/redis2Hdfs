@@ -9,19 +9,19 @@
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </Console>
         <RollingRandomAccessFile name="Rolling_Data"
-                                 fileName="${LOG_HOME}/data/${FILE_NAME}.log"
-                                 filePattern="${LOG_HOME}/data/$${date:yyyy-MM-dd}/${FILE_NAME}-%d{yyyy-MM-dd-HH}.log.%i">
+                                 fileName="${LOG_HOME}/data/${FILE_NAME}.data"
+                                 filePattern="${LOG_HOME}/data/$${date:yyyy-MM-dd}/${FILE_NAME}-%d{yyyy-MM-dd-HH}.data.%i">
             <PatternLayout
                     pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
             <Policies>
                 <TimeBasedTriggeringPolicy interval="1"/>
-                <SizeBasedTriggeringPolicy size="10 MB"/>
+                <SizeBasedTriggeringPolicy size="50 MB"/>
             </Policies>
             <DefaultRolloverStrategy max="168"/>
         </RollingRandomAccessFile>
-        <RollingRandomAccessFile name="Rolling_Error"
-                                 fileName="${LOG_HOME}/err/${FILE_NAME}.err"
-                                 filePattern="${LOG_HOME}/err/$${date:yyyy-MM-dd}/${FILE_NAME}-%d{yyyy-MM-dd-HH}.err.%i">
+        <RollingRandomAccessFile name="Rolling_LOG"
+                                 fileName="${LOG_HOME}/log/${FILE_NAME}.log"
+                                 filePattern="${LOG_HOME}/log/$${date:yyyy-MM-dd}/${FILE_NAME}-%d{yyyy-MM-dd-HH}.log.%i">
             <PatternLayout
                     pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
             <Policies>
@@ -35,10 +35,8 @@
         <Logger name="RollingData" level="INFO" additivity="false">
             <AppenderRef ref="Rolling_Data"/>
         </Logger>
-        <Logger name="RollingError" level="INFO" additivity="false">
-            <AppenderRef ref="Rolling_Error"/>
-        </Logger>
         <Root level="INFO">
+            <AppenderRef ref="Rolling_LOG"/>
             <AppenderRef ref="Console"/>
         </Root>
     </Loggers>

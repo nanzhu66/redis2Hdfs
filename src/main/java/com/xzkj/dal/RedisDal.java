@@ -7,7 +7,19 @@ import redis.clients.jedis.Jedis;
 @Repository
 public class RedisDal {
 
-    private Jedis jedis = MyJedisUtills.getJedis();
+    private Jedis jedis = null;
+
+    public RedisDal() {
+    }
+
+    public RedisDal(Jedis jedis) {
+        this.jedis = jedis;
+    }
+
+    public RedisDal getInit() {
+        this.jedis = MyJedisUtills.getJedis();
+        return this;
+    }
 
     public String get(String key) {
         return jedis.get(key);

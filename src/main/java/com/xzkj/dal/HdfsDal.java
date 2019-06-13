@@ -13,9 +13,23 @@ import java.io.IOException;
 @Repository
 public class HdfsDal {
 
-    private static Logger logger_RollingInfo = LoggerFactory.getLogger("RollingInfo");
+    private static Logger rollingLogger = LoggerFactory.getLogger(HdfsDal.class);
 
-    private FileSystem fs = new MyHdfsUtills().getFileSystem();
+    private FileSystem fs = null;
+
+    public HdfsDal() {
+    }
+
+    public HdfsDal(FileSystem fs) {
+        this.fs = fs;
+    }
+
+    public HdfsDal getInit() {
+        System.out.println(fs);
+        this.fs = MyHdfsUtills.getFileSystem();
+        System.out.println(fs);
+        return this;
+    }
 
     /**
      * 向hdfs的指定路径追加数据，如果路径不存在则会创建新文件
@@ -32,18 +46,18 @@ public class HdfsDal {
             if (!flag) {
                 fs.mkdirs(path.getParent());
                 out = fs.create(path);
-            }else{
+            } else {
                 // 获取该路径的输出流，向文件追加数据
                 out = fs.append(path);
             }
             out.write(data.getBytes());
         } catch (IOException e) {
-            logger_RollingInfo.error("{}",e);
+            rollingLogger.error("", e);
         } finally {
             try {
                 out.close();
             } catch (IOException e) {
-                logger_RollingInfo.error("{}",e);
+                rollingLogger.error("", e);
             }
         }
     }
@@ -55,7 +69,7 @@ public class HdfsDal {
         try {
             fs.close();
         } catch (IOException e) {
-            logger_RollingInfo.error("{}",e);
+            rollingLogger.error("", e);
         }
     }
 

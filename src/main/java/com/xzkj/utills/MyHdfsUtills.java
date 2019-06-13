@@ -2,8 +2,7 @@ package com.xzkj.utills;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
@@ -11,8 +10,9 @@ import java.util.ResourceBundle;
 
 public class MyHdfsUtills {
 
-    private static org.slf4j.Logger logger_RollingInfo = LoggerFactory.getLogger("RollingInfo");
+    private static Logger rollingLogger = LoggerFactory.getLogger(MyHdfsUtills.class);
     private static Configuration conf = null;
+    private static FileSystem fs = null;
 
     static {
         // 创建配置对象，设置配置
@@ -31,13 +31,19 @@ public class MyHdfsUtills {
     /**
      * @return 返回FileSystem客户端连接对象
      */
-    public FileSystem getFileSystem() {
-        FileSystem fs = null;
+    public static FileSystem getFileSystem() {
         // 获取一个文件系统访问对象
         try {
             fs = FileSystem.get(conf);// FileSystem类是一个抽象，可以根据fs.defaultFS参数值不同而获取到访问不同文件系统的对象
         } catch (IOException e) {
-            logger_RollingInfo.error("{}",e);
+            rollingLogger.error("", e);
+        }
+        if (fs == null) {
+            try {
+                fs = FileSystem.newInstance(conf);
+            } catch (IOException e) {
+                rollingLogger.error("", e);
+            }
         }
         return fs;
     }

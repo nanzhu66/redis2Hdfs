@@ -39,8 +39,8 @@ public class MyService {
         String path = bundle.getString("path") + "ods_" + type + "_log/" + date + "/" + type + ".log";
         hdfsDal.getInit().write(path, data);
         // 关闭资源
-//        redisDal.close();
-//        hdfsDal.close();
+        redisDal.close();
+        hdfsDal.close();
     }
 
 }

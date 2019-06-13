@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MyControl {
 
-    private static Logger logger_RollingInfo = LoggerFactory.getLogger("RollingInfo");
+    private static Logger rollingLogger = LoggerFactory.getLogger(MyControl.class);
 
     @Autowired
     MyService service;
@@ -28,7 +28,7 @@ public class MyControl {
      */
     @RequestMapping(value = "/post", method = RequestMethod.POST)
     public String post_test(@RequestParam String key, @RequestParam String type) {
-        logger_RollingInfo.info("the key is [{}] , the type is [{}]", key, type);
+        rollingLogger.info("the key is [{}] , the type is [{}]", key, type);
         // 调用service业务逻辑
         service.dataFromRedis2Hdfs(key, type);
         // 返回给前台一个标记
