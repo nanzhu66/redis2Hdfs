@@ -12,7 +12,6 @@ public class MyHdfsUtills {
 
     private static Logger rollingLogger = LoggerFactory.getLogger(MyHdfsUtills.class);
     private static Configuration conf = null;
-    private static FileSystem fs = null;
 
     static {
         // 创建配置对象，设置配置
@@ -33,17 +32,11 @@ public class MyHdfsUtills {
      */
     public static FileSystem getFileSystem() {
         // 获取一个文件系统访问对象
+        FileSystem fs = null;
         try {
-            fs = FileSystem.get(conf);// FileSystem类是一个抽象，可以根据fs.defaultFS参数值不同而获取到访问不同文件系统的对象
+            fs = FileSystem.newInstance(conf);
         } catch (IOException e) {
             rollingLogger.error("", e);
-        }
-        if (fs == null) {
-            try {
-                fs = FileSystem.newInstance(conf);
-            } catch (IOException e) {
-                rollingLogger.error("", e);
-            }
         }
         return fs;
     }

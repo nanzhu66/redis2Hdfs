@@ -6,7 +6,7 @@ import redis.clients.jedis.JedisPoolConfig;
 
 import java.util.ResourceBundle;
 
-public class MyJedisUtills {
+public class MyRedisUtills {
 
     private static ResourceBundle bundle = ResourceBundle.getBundle("redis");
     private static JedisPool pool;
