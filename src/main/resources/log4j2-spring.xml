@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="INFO" monitorInterval="300">
     <properties>
-        <property name="LOG_HOME">D:/logs</property>
+        <property name="LOG_HOME">/var/log/xzkj</property>
         <property name="FILE_NAME">redis2hdfs</property>
     </properties>
     <Appenders>
