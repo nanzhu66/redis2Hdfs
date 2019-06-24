@@ -1,15 +1,15 @@
-package com.xzkj.dal;
+package com.xzkj.dao;
 
 import com.xzkj.utills.MyRedisUtills;
 import org.springframework.stereotype.Repository;
 import redis.clients.jedis.Jedis;
 
 @Repository
-public class RedisDalImpl implements RedisDal {
+public class RedisDaoImpl implements RedisDao {
 
     private Jedis jedis = null;
 
-    public RedisDalImpl() {
+    public RedisDaoImpl() {
         this.jedis = MyRedisUtills.getJedis();
     }
 

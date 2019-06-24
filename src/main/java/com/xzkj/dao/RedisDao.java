@@ -1,9 +1,9 @@
-package com.xzkj.dal;
+package com.xzkj.dao;
 
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RedisDal {
+public interface RedisDao {
 
     String get(String key);
 

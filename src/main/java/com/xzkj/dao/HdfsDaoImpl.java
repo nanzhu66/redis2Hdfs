@@ -1,4 +1,4 @@
-package com.xzkj.dal;
+package com.xzkj.dao;
 
 import com.xzkj.utills.MyHdfsUtills;
 import org.apache.hadoop.fs.FSDataOutputStream;
@@ -11,13 +11,13 @@ import org.springframework.stereotype.Repository;
 import java.io.IOException;
 
 @Repository
-public class HdfsDalImpl implements HdfsDal {
+public class HdfsDaoImpl implements HdfsDao {
 
-    private static Logger rollingLogger = LoggerFactory.getLogger(HdfsDalImpl.class);
+    private static Logger rollingLogger = LoggerFactory.getLogger(HdfsDaoImpl.class);
 
     private FileSystem fs = null;
 
-    public HdfsDalImpl() {
+    public HdfsDaoImpl() {
         this.fs = MyHdfsUtills.getFileSystem();
     }
 
@@ -29,6 +29,7 @@ public class HdfsDalImpl implements HdfsDal {
      */
     @Override
     public void write(String hdfs_path, String data) {
+
         FSDataOutputStream out = null;
         try {
             Path path = new Path(hdfs_path);
